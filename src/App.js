@@ -7,15 +7,18 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const getUsers = ()=>fetch("/auth/user", {
-      method: "GET, POST, PUT, DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "acess-control-allow-origin": true,
-      },
-      credentials: "include",
-    }).then((response)=>response.json()).then((data)=>setUser(data));
+    const getUsers = () =>
+      fetch("/auth/user", {
+        method: "GET, POST, PUT, DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "acess-control-allow-origin": true,
+        },
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => setUser(data));
     getUsers();
   }, []);
   const Facebook = () => {
@@ -24,16 +27,10 @@ function App() {
   return (
     <div className="App">
       <div className="main">
-        <h1>Forms</h1>
-        <input></input>
-        <input></input>
-        <button>LOGAR</button>
-        <hr className="line"></hr>
-        <div className="containerButton">
-          <button className="facebook" onClick={Facebook}>Facebook</button>
-          <button className="facebook">Google</button>
-
-        </div>
+        <button className="containerButton">
+          <img src="/facebook.png" onClick={Facebook} />
+          LOGAR COM FACEBOOK
+        </button>
       </div>
     </div>
   );

@@ -13,32 +13,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #edeef7;
 }
 
-.main h1{
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: #2c2c2c;
-}
 
-.main input{
-  width: 50%;
-  height: 40px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 10px;
-  padding-left: 10px;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: #2c2c2c;
-}
 
 .main button{
   margin-top: 10px;
   width: 50%;
-  height: 50px;
-  background-color:#fc6b68;
+  height: auto;
+  padding: 10px;
+  background-coloR: #191970;
   border: none;
   border-radius: 15px;
   color: white;
@@ -46,41 +30,26 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.187);
 }
 
-.main hr{
-  width: 50%;
-  height: 1px;
-  background-color: #2c2c2c;
-  margin: 20px 0;
-}
 
 .main button:hover{
-  background-color: #f54b48;
+  background-color: #000080;
+  scale: 1.1;
 }
 
-.containerButton{
-  width: 50%;
-  margin: auto;
-  display: flex;
-  justify-content: start;
-  height: auto;
-  gap: 5px;
-}
-
-.containerButton button{
-  width: 50%;
-  height: 50px;
-  background-color: #edeef7;
-  border: 1px solid white;
-  border-radius: 15px;
-  color: #1a78f1;
-  font-size: 1.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
 
 .containerButton button:hover{
   background-color: #d9d9d9;
 }
+
+.containerButton img{
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+}
+

@@ -3,4 +3,11 @@
   margin: 0;
   padding: 0 auto;
   box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+body{
+  background-color: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
