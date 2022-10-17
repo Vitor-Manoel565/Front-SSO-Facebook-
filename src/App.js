@@ -27,8 +27,8 @@ function App() {
   return (
     <div className="App">
       <div className="main">
-        <button className="containerButton">
-          <img src="/facebook.png" onClick={Facebook} />
+        <button className="containerButton" onClick={Facebook}>
+          <img src="/facebook.png"/>
           LOGAR COM FACEBOOK
         </button>
       </div>
