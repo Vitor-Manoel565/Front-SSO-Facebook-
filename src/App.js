@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
@@ -7,8 +8,22 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const getUsers = () =>
-      fetch("/auth/user", {
+    // const getUsers = () =>
+    //   fetch("/auth/user", {
+    //     method: "GET, POST, PUT, DELETE",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Accept: "application/json",
+    //       "acess-control-allow-origin": true,
+    //     },
+    //     credentials: "include",
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => setUser(data));
+    // getUsers();
+
+    const getUsers = async () => {
+      const response = await axios.get("/auth/user", {
         method: "GET, POST, PUT, DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -16,9 +31,9 @@ function App() {
           "acess-control-allow-origin": true,
         },
         credentials: "include",
-      })
-        .then((response) => response.json())
-        .then((data) => setUser(data));
+      });
+      setUser(response.data);
+    }
     getUsers();
   }, []);
   const Facebook = () => {
