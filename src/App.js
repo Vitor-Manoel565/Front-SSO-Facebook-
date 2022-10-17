@@ -3,25 +3,10 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  // const user = false;
 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // const getUsers = () =>
-    //   fetch("/auth/user", {
-    //     method: "GET, POST, PUT, DELETE",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //       "acess-control-allow-origin": true,
-    //     },
-    //     credentials: "include",
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => setUser(data));
-    // getUsers();
-
     const getUsers = async () => {
       const response = await axios.get("/auth/user", {
         method: "GET, POST, PUT, DELETE",
