@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 const FacebookLoginPage = () => {
   // Login with Facebook with react
   useEffect(() => {
@@ -11,7 +12,7 @@ const FacebookLoginPage = () => {
       }
       js = d.createElement(s);
       js.id = id;
-      js.src = "https://connect.facebook.net/en_US/all.js";
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
   }, []);
@@ -21,10 +22,10 @@ const FacebookLoginPage = () => {
   useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: process.env.REACT_APP_FACEBOOK_APP_ID,
+        appId: "1264179427708139",
         cookie: true,
         xfbml: true,
-        version: "v15.0",
+        version: "v9.0",
       });
 
       window.FB.AppEvents.logPageView();
@@ -33,8 +34,15 @@ const FacebookLoginPage = () => {
 
   // Check login state
   const checkLoginState = () => {
-    window.FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
+    window.FB.login(function (response) {
+      if (response.authResponse) {
+        console.log("Welcome!  Fetching your information.... ");
+        window.FB.api("/me", function (response) {
+          console.log("Good to see you, " + response.name + ".");
+        });
+      } else {
+        console.log("User cancelled login or did not fully authorize.");
+      }
     });
   };
 
@@ -49,24 +57,6 @@ const FacebookLoginPage = () => {
     }
   };
 
-
-  async function handleLogin(){
-    window.FB.login(function(response) {
-      if (response.authResponse) {
-        console.log('Welcome!  Fetching your information.... ');
-        window.FB.api('/me', function(response) {
-          console.log('Good to see you, ' + response.name + '.');
-        });
-      } else {
-        console.log('User cancelled login or did not fully authorize.');
-      }
-    }
-    , {scope: 'email'});
-
-  }
-
-
-
   // Test API
   const testAPI = () => {
     console.log("Welcome!  Fetching your information.... ");
@@ -76,6 +66,7 @@ const FacebookLoginPage = () => {
         "Thanks for logging in, " + response.name + "!";
     });
   };
+
 
   return (
     <div>
@@ -88,10 +79,8 @@ const FacebookLoginPage = () => {
         data-layout="default"
         data-auto-logout-link="false"
         data-use-continue-as="false"
-        data-scope="<comma separated list of permissions, e.g. public_profile, email>"
         onClick={checkLoginState}
       ></div>
-      <button onClick={handleLogin}>LOGAR</button>
       <div id="status"></div>
     </div>
   );
