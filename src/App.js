@@ -22,7 +22,7 @@ const FacebookLoginPage = () => {
   useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: "1264179427708139",
+        appId: "1147465239309646",
         cookie: true,
         xfbml: true,
         version: "v9.0",
@@ -34,15 +34,8 @@ const FacebookLoginPage = () => {
 
   // Check login state
   const checkLoginState = () => {
-    window.FB.login(function (response) {
-      if (response.authResponse) {
-        console.log("Welcome!  Fetching your information.... ");
-        window.FB.api("/me", function (response) {
-          console.log("Good to see you, " + response.name + ".");
-        });
-      } else {
-        console.log("User cancelled login or did not fully authorize.");
-      }
+    window.FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
     });
   };
 
