@@ -34,7 +34,6 @@ const FacebookLoginPage = () => {
   // Check login state
   const checkLoginState = () => {
     window.FB.getLoginStatus(function (response) {
-      console.log(response);
       statusChangeCallback(response);
     });
   };
@@ -49,6 +48,24 @@ const FacebookLoginPage = () => {
         "Please log " + "into this app.";
     }
   };
+
+
+  async function handleLogin(){
+    window.FB.login(function(response) {
+      if (response.authResponse) {
+        console.log('Welcome!  Fetching your information.... ');
+        window.FB.api('/me', function(response) {
+          console.log('Good to see you, ' + response.name + '.');
+        });
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }
+    , {scope: 'email'});
+
+  }
+
+
 
   // Test API
   const testAPI = () => {
@@ -71,7 +88,8 @@ const FacebookLoginPage = () => {
         data-layout="default"
         data-auto-logout-link="false"
         data-use-continue-as="false"
-        onClick={checkLoginState}
+        data-scope="<comma separated list of permissions, e.g. public_profile, email>"
+        onClick={handleLogin}
       ></div>
       <div id="status"></div>
     </div>
