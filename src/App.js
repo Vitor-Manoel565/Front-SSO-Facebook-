@@ -91,7 +91,7 @@ const FacebookLoginPage = () => {
         data-scope="<comma separated list of permissions, e.g. public_profile, email>"
         onClick={checkLoginState}
       ></div>
-      <button onClick={handleLogin}/>
+      <button onClick={handleLogin}>LOGAR</button>
       <div id="status"></div>
     </div>
   );
