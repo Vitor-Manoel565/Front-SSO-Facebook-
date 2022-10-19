@@ -29,6 +29,7 @@ const FacebookLoginPage = () => {
 
       window.FB.AppEvents.logPageView();
     };
+    console.log(process.env.REACT_APP_FACEBOOK_APP_ID);
   }, []);
 
   // Check login state
