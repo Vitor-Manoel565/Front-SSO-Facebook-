@@ -1,39 +1,84 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import "./App.css";
+import { useEffect } from "react";
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
 
-function App() {
+const FacebookLoginPage = () => {
+  // Login with Facebook with react
+  useEffect(() => {
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  }, []);
 
-  const [user, setUser] = useState(null);
+  // Initialize and add the facebook script
 
   useEffect(() => {
-    const getUsers = async () => {
-      const response = await axios.get("/auth/user", {
-        method: "GET, POST, PUT, DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "acess-control-allow-origin": true,
-        },
-        credentials: "include",
+    window.fbAsyncInit = function () {
+      window.FB.init({
+        appId: process.env.APP_ID,
+        cookie: true,
+        xfbml: true,
+        version: "v9.0",
       });
-      setUser(response.data);
-    }
-    getUsers();
+
+      window.FB.AppEvents.logPageView();
+    };
   }, []);
-  const Facebook = () => {
-    window.open("http://localhost:5000/auth/facebook", "_self");
+
+  // Check login state
+  const checkLoginState = () => {
+    window.FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    });
   };
+
+  // Handle the response
+  const statusChangeCallback = (response) => {
+
+    console.log(response);
+    if (response.status === "connected") {
+      testAPI();
+    } else {
+      document.getElementById("status").innerHTML =
+        "Please log " + "into this app.";
+    }
+  };
+
+  // Test API
+  const testAPI = () => {
+    console.log("Welcome!  Fetching your information.... ");
+    window.FB.api("/me", function (response) {
+      console.log("Successful login for: " + response.name);
+      document.getElementById("status").innerHTML =
+        "Thanks for logging in, " + response.name + "!";
+    });
+  };
+
   return (
-    <div className="App">
-      <div className="main">
-        <button className="containerButton" onClick={Facebook}>
-          <img src="/facebook.png"/>
-          LOGAR COM FACEBOOK
-        </button>
-      </div>
+    <div>
+      <h1>Facebook Login</h1>
+      <div
+        className="fb-login-button"
+        data-width=""
+        data-size="large"
+        data-button-type="continue_with"
+        data-layout="default"
+        data-auto-logout-link="false"
+        data-use-continue-as="false"
+        onClick={checkLoginState}
+      ></div>
+      <div id="status"></div>
     </div>
   );
-}
+};
 
-export default App;
+export default FacebookLoginPage;
