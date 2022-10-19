@@ -89,8 +89,9 @@ const FacebookLoginPage = () => {
         data-auto-logout-link="false"
         data-use-continue-as="false"
         data-scope="<comma separated list of permissions, e.g. public_profile, email>"
-        onClick={handleLogin}
+        onClick={checkLoginState}
       ></div>
+      <button onClick={handleLogin}/>
       <div id="status"></div>
     </div>
   );
