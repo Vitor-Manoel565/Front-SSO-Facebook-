@@ -11,7 +11,7 @@ const FacebookLoginPage = () => {
       }
       js = d.createElement(s);
       js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      js.src = "https://connect.facebook.net/en_US/all.js";
       fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
   }, []);
@@ -24,7 +24,7 @@ const FacebookLoginPage = () => {
         appId: process.env.REACT_APP_FACEBOOK_APP_ID,
         cookie: true,
         xfbml: true,
-        version: "v9.0",
+        version: "v15.0",
       });
 
       window.FB.AppEvents.logPageView();
