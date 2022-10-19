@@ -1,7 +1,4 @@
 import { useEffect } from "react";
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
-
 const FacebookLoginPage = () => {
   // Login with Facebook with react
   useEffect(() => {
@@ -24,7 +21,7 @@ const FacebookLoginPage = () => {
   useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: process.env.APP_ID,
+        appId: process.env.REACT_APP_FACEBOOK_APP_ID,
         cookie: true,
         xfbml: true,
         version: "v9.0",
@@ -43,7 +40,6 @@ const FacebookLoginPage = () => {
 
   // Handle the response
   const statusChangeCallback = (response) => {
-
     console.log(response);
     if (response.status === "connected") {
       testAPI();
