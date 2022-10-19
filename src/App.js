@@ -29,12 +29,12 @@ const FacebookLoginPage = () => {
 
       window.FB.AppEvents.logPageView();
     };
-    console.log(process.env.REACT_APP_FACEBOOK_APP_ID);
   }, []);
 
   // Check login state
   const checkLoginState = () => {
     window.FB.getLoginStatus(function (response) {
+      console.log(response);
       statusChangeCallback(response);
     });
   };
@@ -71,7 +71,7 @@ const FacebookLoginPage = () => {
         data-layout="default"
         data-auto-logout-link="false"
         data-use-continue-as="false"
-        onClick={[checkLoginState,testAPI]}
+        onClick={checkLoginState}
       ></div>
       <div id="status"></div>
     </div>
