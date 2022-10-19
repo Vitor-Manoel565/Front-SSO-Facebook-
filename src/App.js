@@ -71,7 +71,7 @@ const FacebookLoginPage = () => {
         data-layout="default"
         data-auto-logout-link="false"
         data-use-continue-as="false"
-        onClick={checkLoginState}
+        onClick={[checkLoginState,testAPI]}
       ></div>
       <div id="status"></div>
     </div>
