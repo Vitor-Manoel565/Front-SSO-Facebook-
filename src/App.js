@@ -22,7 +22,7 @@ const FacebookLoginPage = () => {
   useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: "1264179427708139",
+        appId: "1147465239309646",
         cookie: true,
         xfbml: true,
         version: "v9.0",
