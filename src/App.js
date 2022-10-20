@@ -1,87 +1,51 @@
 import { useEffect } from "react";
 
 const FacebookLoginPage = () => {
-  // Login with Facebook with react
-  useEffect(() => {
-    // Load the SDK asynchronously
-    (function (d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
-  }, []);
-
-  // Initialize and add the facebook script
-
-  useEffect(() => {
-    window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: "1147465239309646",
-        cookie: true,
-        xfbml: true,
-        version: "v9.0",
-      });
-
-      window.FB.AppEvents.logPageView();
-    };
-  }, []);
-
-  // Check login state
-  
-
-  const getAcessToken= ()=>{
-    const checkLoginState = () => {
-      window.FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
-      });
-    };
-    window.FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        console.log('Logged in.');
-        var uid = response.authResponse.userID;
-        var accessToken = response.authResponse.accessToken;
-        console.log(accessToken);
-      } else if (response.status === 'not_authorized') {
-        // The user hasn't authorized your application.  They
-        // must click the Login button, or you must call FB.login
-        // in response to a user gesture, to launch a login dialog.
-        console.log('Not authorized.');
-      } else {
-        // The user isn't logged in to Facebook. You can launch a
-        // login dialog with a user gesture, but the user may have
-        // to log in to Facebook before authorizing your application.
-        console.log('Not logged in.');
-      }
-     });
-  } 
-
-  // Handle the response
-  const statusChangeCallback = (response) => {
-    console.log(response);
+  function statusChangeCallback(response) {
+    // Called with the results from FB.getLoginStatus().
+    console.log("statusChangeCallback");
+    console.log(response); // The current login status of the person.
     if (response.status === "connected") {
+      // Logged into your webpage and Facebook.
       testAPI();
     } else {
+      // Not logged into your webpage or we are unable to tell.
       document.getElementById("status").innerHTML =
-        "Please log " + "into this app.";
+        "Please log " + "into this webpage.";
     }
+  }
+
+  function checkLoginState() {
+    // Called when a person is finished with the Login Button.
+    window.FB.getLoginStatus(function (response) {
+      // See the onlogin handler
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function () {
+    window.FB.init({
+      appId: "{app-id}",
+      cookie: true, // Enable cookies to allow the server to access the session.
+      xfbml: true, // Parse social plugins on this webpage.
+      version: "{api-version}", // Use this Graph API version for this call.
+    });
+
+    window.FB.getLoginStatus(function (response) {
+      // Called after the JS SDK has been initialized.
+      statusChangeCallback(response); // Returns the login status.
+    });
   };
 
-  // Test API
-  const testAPI = () => {
+  function testAPI() {
+    // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
     console.log("Welcome!  Fetching your information.... ");
     window.FB.api("/me", function (response) {
       console.log("Successful login for: " + response.name);
       document.getElementById("status").innerHTML =
         "Thanks for logging in, " + response.name + "!";
     });
-  };
-
+  }
 
   return (
     <div>
@@ -94,7 +58,8 @@ const FacebookLoginPage = () => {
         data-layout="default"
         data-auto-logout-link="false"
         data-use-continue-as="false"
-        onClick={getAcessToken}
+        scope="public_profile,email"
+        onlogin={checkLoginState()}
       ></div>
       <div id="status"></div>
     </div>
