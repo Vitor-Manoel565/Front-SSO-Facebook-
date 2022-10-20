@@ -18,6 +18,8 @@ const FacebookLoginPage = () => {
   }, []);
 
   // Initialize and add the facebook script
+
+  useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: "1264179427708139",
@@ -28,6 +30,7 @@ const FacebookLoginPage = () => {
 
       window.FB.AppEvents.logPageView();
     };
+  }, []);
 
   const checkLoginState = () => {
     window.FB.getLoginStatus(function (response) {
@@ -35,10 +38,9 @@ const FacebookLoginPage = () => {
     });
   };
   const statusChangeCallback = (response) => {
-
-    console.log(response);
     if (response.status === "connected") {
       testAPI();
+      console.log(response);
     } else {
       document.getElementById("status").innerHTML =
         "Please log " + "into this app.";
