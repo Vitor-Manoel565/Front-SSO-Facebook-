@@ -33,19 +33,20 @@ const FacebookLoginPage = () => {
   }, []);
 
   // Check login state
-  const checkLoginState = () => {
-    getAcessToken();
-    window.FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    });
-  };
+  
 
   const getAcessToken= ()=>{
+    const checkLoginState = () => {
+      window.FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+      });
+    };
     window.FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
         console.log('Logged in.');
         var uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
+        console.log(accessToken);
       } else if (response.status === 'not_authorized') {
         // The user hasn't authorized your application.  They
         // must click the Login button, or you must call FB.login
