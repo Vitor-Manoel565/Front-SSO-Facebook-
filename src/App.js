@@ -10,7 +10,7 @@ const App = () => {
       appId="1147465239309646"
       autoLoad={true}
       fields="name,email,picture"
-      onClick={console.log("clicado!")}
+      onClick={()=> console.log("clicado!")}
       callback={responseFacebook}
     />
   );
