@@ -30,7 +30,7 @@ const FacebookLoginPage = () => {
 
       window.FB.AppEvents.logPageView();
     };
-    console.log("logando status:",checkLoginState());
+    console.log(checkLoginState());
   }, []);
   
   // Check login state
