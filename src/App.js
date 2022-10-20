@@ -18,8 +18,6 @@ const FacebookLoginPage = () => {
   }, []);
 
   // Initialize and add the facebook script
-
-  useEffect(() => {
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: "1264179427708139",
@@ -30,17 +28,12 @@ const FacebookLoginPage = () => {
 
       window.FB.AppEvents.logPageView();
     };
-    console.log(checkLoginState());
-  }, []);
-  
-  // Check login state
+
   const checkLoginState = () => {
     window.FB.getLoginStatus(function (response) {
       statusChangeCallback(response);
     });
   };
-
-  // Handle the response
   const statusChangeCallback = (response) => {
 
     console.log(response);
@@ -51,6 +44,10 @@ const FacebookLoginPage = () => {
         "Please log " + "into this app.";
     }
   };
+  
+  // Check login state
+
+  // Handle the response
 
   // Test API
   const testAPI = () => {
