@@ -35,6 +35,7 @@ const FacebookLoginPage = () => {
   // Check login state
   const checkLoginState = () => {
     window.FB.getLoginStatus(function (response) {
+      console.log("teste!");
       statusChangeCallback(response);
     });
   };
