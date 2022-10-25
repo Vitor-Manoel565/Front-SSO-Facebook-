@@ -8,10 +8,11 @@ const App = () => {
 
   return (
     <InstagramLogin
-      clientId="1147465239309646"
+      clientId="1296989504384057"
       buttonText="Login"
       onSuccess={responseInstagram}
       onFailure={responseInstagram}
+      access
     />
   );
 };
