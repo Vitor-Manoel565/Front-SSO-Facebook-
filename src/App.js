@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {isLoggedIn ? (
+      {isLoggedIn === true ? (
         <div>
           <h1>Olá, você está logado!</h1>
           <h2>Seu token é: {token}</h2>
