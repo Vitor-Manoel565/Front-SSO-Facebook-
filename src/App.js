@@ -7,11 +7,13 @@ const App = () => {
   const [token, setToken] = useState({});
 
   useEffect(() => {
-    if (token) {
+    const data = localStorage.getItem("token") || [];
+    if (data.length > 0) {
+      setToken(JSON.parse(data));
       setIsLoggedIn(true);
     }
-  }, [token]);
-  
+  }, []);
+
   const responseInstagram = (response) => {
     if (!response.error_type) {
       setIsLoggedIn(true);
