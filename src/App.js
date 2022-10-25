@@ -3,7 +3,7 @@ import  InstagramLogin  from "react-instagram-login";
 
 const App = () => {
   const responseInstagram = (response) => {
-    console.log(response);
+    console.log("Este é o token:",response);
   };
 
   return (
