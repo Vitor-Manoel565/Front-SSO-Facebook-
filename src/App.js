@@ -1,10 +1,17 @@
 // import FacebookLogin from "react-facebook-login";
 import InstagramLogin from "react-instagram-login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState({});
+
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, [token]);
+  
   const responseInstagram = (response) => {
     if (!response.error_type) {
       setIsLoggedIn(true);
