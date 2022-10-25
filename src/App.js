@@ -8,7 +8,10 @@ const App = () => {
   const responseInstagram = (response) => {
     if (!response.error_type) {
       setIsLoggedIn(true);
-      const accessToken = response;
+      const accessToken = {
+        accessToken: response
+      } ;
+      localStorage.setItem("accessToken", JSON.stringify(accessToken));
       setToken(accessToken);
       console.log("Você está logado, seu token é: ", accessToken);
     }
