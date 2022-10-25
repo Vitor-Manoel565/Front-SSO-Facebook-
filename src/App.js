@@ -1,9 +1,17 @@
 // import FacebookLogin from "react-facebook-login";
 import  InstagramLogin  from "react-instagram-login";
+import { useState } from "react";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
   const responseInstagram = (response) => {
-    console.log("Este é o token:",response);
+    if(!response.error_type){
+      setIsLoggedIn(true);
+      setToken(response)
+      console.log("Você está logado, seu token é: ", token);
+
+    }
   };
 
   return (
