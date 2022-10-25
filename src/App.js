@@ -12,7 +12,6 @@ const App = () => {
       buttonText="Login"
       onSuccess={responseInstagram}
       onFailure={responseInstagram}
-      access
       scope="user_profile,user_media"
     />
   );
