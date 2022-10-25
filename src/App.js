@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <InstagramLogin
-      clientId="572050501359312"
+      clientId="1147465239309646"
       buttonText="Login"
       onSuccess={responseInstagram}
       onFailure={responseInstagram}
