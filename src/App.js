@@ -13,6 +13,7 @@ const App = () => {
       onSuccess={responseInstagram}
       onFailure={responseInstagram}
       access
+      scope="user_profile,user_media"
     />
   );
 };
